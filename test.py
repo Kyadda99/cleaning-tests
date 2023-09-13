@@ -1,10 +1,20 @@
 import os
 import time
 
+def rozszerzenie(oneFile):
+    temp = oneFile.split('.')[-1]
+    return + temp
 
 
-def dateCheck(file):
-    data = os.path.getctime(file)
+def wgraj(rozszerzenie):
+    pathname = 'rozszerzenia %s' % (rozszerzenie)
+    if not os.path.exists(pathname):
+        os.makedirs(pathname)
+    
+    
+
+def dateCheck(fileName):
+    data = os.path.getctime(fileName)
     dataTranslated = time.ctime(data)
     el1 = dataTranslated[4:7]
     el2 = dataTranslated[20:24]
