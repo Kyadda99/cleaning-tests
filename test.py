@@ -6,7 +6,7 @@ from tkinter import filedialog
 location = filedialog.askdirectory()
 locationNew = location.split('/')[-1]
 locationNew = location.replace(locationNew,'')
-print (locationNew)
+# print (locationNew)
 
 
 
@@ -40,11 +40,20 @@ def wgraj(file,locFrom,loc=locationNew):
     else:
         i=1
         while i>0:
-            if not os.path.exists(filePathNew+'(%s)'%(i)):
-                os.rename(file,loc+'/'+file.split('/')[-1]+'('+str(i)+')')
+            if not os.path.exists(copyName(filePathNew,i)):
+                os.rename(file,copyName(loc+'/'+file.split('/')[-1],i))
                 break
             else:
                 i=i+1
+
+def copyName(name,numer):
+    after = name.split('.')[-1]
+    before = name.replace('.'+after,'')
+
+    return before + '(%s)' % (str(numer)) +'.'+ after
+
+
+
 
     
 def dateMove(date,loc):
@@ -109,7 +118,7 @@ def datySort(loc):
     for i in dirList:
         dirPath=loc+'/'+i
         newDirList=os.listdir(dirPath)
-        print(newDirList)
+        # print(newDirList)
         for j in newDirList:
             filePath=dirPath+'/'+j
             datefile=dateCheck(filePath)
