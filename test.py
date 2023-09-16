@@ -31,14 +31,26 @@ def wgraj(file,locFrom,loc=locationNew):
     folderName = 'rozszerzenia %s' % (end)
     # print(folderName)
     loc = loc+"Porządek/"+folderName
-    # print("        loc from  "+file)
-    # print('             loc  '+loc)
     if not os.path.exists(loc):
         os.makedirs(loc)
-    shutil.move(file,loc)
+    filePathNew=loc+'/'+file.split('/')[-1]
+    exist = os.path.exists(filePathNew)
+    if not exist:
+        shutil.move(file,loc)
+    else:
+        i=1
+        while i>0:
+            if not os.path.exists(filePathNew+'(%s)'%(i)):
+                a=filePathNew+'(%s)'%(i)
+                os.rename(file,loc+'/'+file.split('/')[-1]+'('+str(i)+')')
+                b=loc+'/'+file.split('/')[-1]+'('+str(i)+')'
+                break
+            else:
+                i=i+1
+
     
 def dateMove(date,loc):
-    print (date)
+    # print (date)
     locDate = loc.split('/')[-1]
     locDate = loc.replace(locDate,'')
     locDate = locDate +'/'+ transDate(date)
@@ -95,7 +107,7 @@ def main(loc):
 
 def datySort(loc):
     dirList=os.listdir(loc)
-    print(dirList)
+    # print(dirList)
     for i in dirList:
         dirPath=loc+'/'+i
         newDirList=os.listdir(dirPath)
