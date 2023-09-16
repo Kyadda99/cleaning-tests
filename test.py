@@ -41,9 +41,7 @@ def wgraj(file,locFrom,loc=locationNew):
         i=1
         while i>0:
             if not os.path.exists(filePathNew+'(%s)'%(i)):
-                a=filePathNew+'(%s)'%(i)
                 os.rename(file,loc+'/'+file.split('/')[-1]+'('+str(i)+')')
-                b=loc+'/'+file.split('/')[-1]+'('+str(i)+')'
                 break
             else:
                 i=i+1
