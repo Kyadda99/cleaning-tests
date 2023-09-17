@@ -7,12 +7,30 @@ location = filedialog.askdirectory()
 locationNew = location.split('/')[-1]
 locationNew = location.replace(locationNew,'')
 # print (locationNew)
+i=1
+if os.path.exists(locationNew+'/Porządek'):
+    while i>0:
+        if not os.path.exists(locationNew+'/Porządek'+'(%s)'%(i)):
+            sortedDir='Porządek'+'(%s)'%(i)
+            break
+        else:
+            i=i+1
+else:
+    sortedDir= 'Porządek'
 
 
+
+
+
+# Pożądek był w tym folderze co pliki
+# dodać if żeby pliki bez rozszerzenia tam lądąowały
 
 
 def rozszerzenie(oneFile):
-    return oneFile.split('.')[-1]
+    if '.' in oneFile:
+        return oneFile.split('.')[-1]
+    else:
+        return 'brak_rozszerzenia' 
  
 
 def check(file,loc):
@@ -26,11 +44,11 @@ def check(file,loc):
 
 
 
-def wgraj(file,locFrom,loc=locationNew):
+def wgraj(file,locFrom,loc=locationNew,sortDir=sortedDir):
     end= rozszerzenie(file)
     folderName = 'rozszerzenia %s' % (end)
     # print(folderName)
-    loc = loc+"Porządek/"+folderName
+    loc = loc+sortDir+"/"+folderName
     if not os.path.exists(loc):
         os.makedirs(loc)
     filePathNew=loc+'/'+file.split('/')[-1]
@@ -128,9 +146,9 @@ def datySort(loc):
 
 
 
-def all(loc,locNew):
+def all(loc,locNew,sortDir=sortedDir):
     main(loc)
-    locNew=locNew+'/Porządek'
+    locNew=locNew+'/'+sortedDir
     datySort(locNew)
 
 
