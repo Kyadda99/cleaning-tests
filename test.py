@@ -20,12 +20,6 @@ else:
 
 
 
-
-
-# Pożądek był w tym folderze co pliki
-# dodać if żeby pliki bez rozszerzenia tam lądąowały
-
-
 def rozszerzenie(oneFile):
     if '.' in oneFile:
         return oneFile.split('.')[-1]
@@ -108,8 +102,10 @@ def transDate(date):
         return 'Paźdźernik'+ year
     elif month == 'Nov':
         return 'Listopad'+ year
-    else:
+    elif month == 'Dec':
         return 'Grudzień'+ year
+    else:
+        return month + year
     
     
 
